@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apna Local Market</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f6f7fb;
+      color: #222;
+    }
+
+    /* HEADER */
+    header {
+      background: white;
+      padding: 15px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff5a1f;
+    }
+
+    .logo span {
+      color: #222;
+    }
+
+    .location {
+      font-size: 14px;
+      color: #555;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ff5a1f;
+    }
+
+    .login-btn {
+      background: #ff5a1f;
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 8px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 70px 6%;
+      background: linear-gradient(135deg, #fff3eb, #fff);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #ff5a1f;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .search-box {
+      max-width: 750px;
+      margin: auto;
+      display: flex;
+      background: white;
+      padding: 8px;
+      border-radius: 12px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 15px;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      border: none;
+      background: #ff5a1f;
+      color: white;
+      padding: 0 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* SECTION */
+    .section {
+      padding: 50px 6%;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 28px;
+    }
+
+    .section-title a {
+      color: #ff5a1f;
+      text-decoration: none;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 18px;
+    }
+
+    .category {
+      background: white;
+      padding: 25px 10px;
+      text-align: center;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+    }
+
+    .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .category .icon {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .category p {
+      font-weight: 600;
+    }
+
+    /* SHOPS */
+    .shops {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .shop-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      transition: 0.3s;
+    }
+
+    .shop-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .shop-image {
+      height: 160px;
+      background: linear-gradient(135deg, #ff9966, #ff5e62);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 65px;
+    }
+
+    .shop-content {
+      padding: 18px;
+    }
+
+    .shop-content h3 {
+      margin-bottom: 7px;
+    }
+
+    .shop-content p {
+      color: #777;
+      font-size: 14px;
+      margin: 6px 0;
+    }
+
+    .rating {
+      color: #f39c12;
+      font-weight: bold;
+    }
+
+    .open {
+      color: green;
+      font-weight: bold;
+    }
+
+    .shop-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .shop-buttons button {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .view-btn {
+      background: #ff5a1f;
+      color: white;
+    }
+
+    .call-btn {
+      background: #e9f8ed;
+      color: green;
+    }
+
+    /* OFFERS */
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .offer-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      border-left: 5px solid #ff5a1f;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .discount {
+      display: inline-block;
+      background: #ffe4d8;
+      color: #ff5a1f;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .old-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 15px;
+      margin-left: 5px;
+    }
+
+    /* WHY US */
+    .why-us {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .why-card {
+      background: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 14px;
+    }
+
+    .why-card div {
+      font-size: 35px;
+      margin-bottom: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #202124;
+      color: white;
+      padding: 45px 6% 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    footer h3 {
+      margin-bottom: 15px;
+    }
+
+    footer p,
+    footer a {
+      color: #bbb;
+      display: block;
+      margin: 8px 0;
+      text-decoration: none;
+    }
+
+    .copyright {
+      text-align: center;
+      border-top: 1px solid #444;
+      margin-top: 30px;
+      padding-top: 20px;
+      color: #aaa;
+    }
+
+    /* MOBILE NAV */
+    .mobile-nav {
+      display: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+
+      header {
+        padding: 13px 5%;
+      }
+
+      .location,
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 50px 5%;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .search-box {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .search-box button {
+        padding: 13px;
+      }
+
+      .section {
+        padding: 35px 5%;
+      }
+
+      .section-title h2 {
+        font-size: 23px;
+      }
+
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        justify-content: space-around;
+        padding: 12px 5px;
+        box-shadow: 0 -3px 15px rgba(0,0,0,0.12);
+        z-index: 999;
+      }
+
+      .mobile-nav a {
+        text-decoration: none;
+        color: #555;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .mobile-nav span {
+        display: block;
+        font-size: 21px;
+      }
+
+      footer {
+        padding-bottom: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    Apna <span>Local Market</span>
+  </div>
+
+  <div class="location">
+    📍 Bhopal, Madhya Pradesh
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#shops">Shops</a>
+    <a href="#offers">Offers</a>
+    <a href="#" class="login-btn">Login</a>
+  </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <h1>Apne Shehar Ki <span>Har Zaroorat</span></h1>
+
+  <p>
+    Apne aas-paas ke trusted local shops aur businesses ko discover karein.
+  </p>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search shops, products & services..."
+    >
+
+    <button onclick="searchShops()">
+      🔍 Search
+    </button>
+  </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+
+  <div class="section-title">
+    <h2>Popular Categories</h2>
+    <a href="#">View All</a>
+  </div>
+
+  <div class="categories">
+
+    <div class="category">
+      <div class="icon">🛒</div>
+      <p>Grocery</p>
+    </div>
+
+    <div class="category">
+      <div class="icon">🥦</div>
+      <p>Fruits & Vegetables</p>
+    </div>
+
+    <div class="category">
+      <div class="icon">💊</div>
+      <p>Medical</p>
+    </div>
+
+    <div class="category">
+      <div class="icon">👕</div>
+      <p>Clothing</p>
+    </div>
+
+    <div class="category">
+      <div class="icon">📱</div>
+      <p>Electronics</p>
+    </div>
+
+    <div class="category">
+      <div class="icon">🍕</div>
+      <p>Food</p>
+    </div>
+
+    <div class="category">
+      <div class="icon">📚</div>
+      <p>Stationery</p>
+    </div>
+
+    <div class="category">
+      <div class="icon">🔧</div>
+      <p>Services</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- NEARBY SHOPS -->
+<section class="section" id="shops">
+
+  <div class="section-title">
+    <h2>Nearby Shops</h2>
+    <a href="#">View All</a>
+  </div>
+
+  <div class="shops" id="shopContainer">
+
+    <div class="shop-card" data-name="Sharma Kirana Store grocery">
+
+      <div class="shop-image">
+        🛒
+      </div>
+
+      <div class="shop-content">
+
+        <h3>Sharma Kirana Store</h3>
+
+        <p>🛒 Grocery & Daily Needs</p>
+
+        <p class="rating">⭐ 4.7 (125 reviews)</p>
+
+        <p>📍 MP Nagar, Bhopal</p>
+
+        <p class="open">● Open Now</p>
+
+        <div class="shop-buttons">
+          <button class="view-btn" onclick="viewShop('Sharma Kirana Store')">
+            View Shop
+          </button>
+
+          <button class="call-btn" onclick="callShop()">
+            📞 Call
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="shop-card" data-name="Gupta Mobile Center electronics mobile">
+
+      <div class="shop-image">
+        📱
+      </div>
+
+      <div class="shop-content">
+
+        <h3>Gupta Mobile Center</h3>
+
+        <p>📱 Mobile & Electronics</p>
+
+        <p class="rating">⭐ 4.5 (89 reviews)</p>
+
+        <p>📍 New Market, Bhopal</p>
+
+        <p class="open">● Open Now</p>
+
+        <div class="shop-buttons">
+
+          <button class="view-btn" onclick="viewShop('Gupta Mobile Center')">
+            View Shop
+          </button>
+
+          <button class="call-btn" onclick="callShop()">
+            📞 Call
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="shop-card" data-name="Fresh Bakery food bakery">
+
+      <div class="shop-image">
+        🥐
+      </div>
+
+      <div class="shop-content">
+
+        <h3>Fresh Bakery</h3>
+
+        <p>🥐 Bakery & Snacks</p>
+
+        <p class="rating">⭐ 4.8 (210 reviews)</p>
+
+        <p>📍 Arera Colony, Bhopal</p>
+
+        <p class="open">● Open Now</p>
+
+        <div class="shop-buttons">
+
+          <button class="view-btn" onclick="viewShop('Fresh Bakery')">
+            View Shop
+          </button>
+
+          <button class="call-btn" onclick="callShop()">
+            📞 Call
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- OFFERS -->
+<section class="section" id="offers">
+
+  <div class="section-title">
+    <h2>🔥 Today's Offers</h2>
+    <a href="#">View All</a>
+  </div>
+
+  <div class="offers">
+
+    <div class="offer-card">
+
+      <span class="discount">30% OFF</span>
+
+      <h3>Grocery Shopping</h3>
+
+      <p>Sharma Kirana Store</p>
+
+      <div class="price">
+        ₹699
+        <span class="old-price">₹999</span>
+      </div>
+
+      <button class="view-btn" onclick="claimOffer()">
+        View Offer
+      </button>
+
+    </div>
+
+
+    <div class="offer-card">
+
+      <span class="discount">20% OFF</span>
+
+      <h3>Mobile Accessories</h3>
+
+      <p>Gupta Mobile Center</p>
+
+      <div class="price">
+        ₹399
+        <span class="old-price">₹499</span>
+      </div>
+
+      <button class="view-btn" onclick="claimOffer()">
+        View Offer
+      </button>
+
+    </div>
+
+
+    <div class="offer-card">
+
+      <span class="discount">15% OFF</span>
+
+      <h3>Bakery Special</h3>
+
+      <p>Fresh Bakery</p>
+
+      <div class="price">
+        ₹255
+        <span class="old-price">₹300</span>
+      </div>
+
+      <button class="view-btn" onclick="claimOffer()">
+        View Offer
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- WHY US -->
+<section class="section">
+
+  <div class="section-title">
+    <h2>Why Choose Apna Local Market?</h2>
+  </div>
+
+  <div class="why-us">
+
+    <div class="why-card">
+      <div>🏪</div>
+      <h3>Local Businesses</h3>
+      <p>Discover businesses around you.</p>
+    </div>
+
+    <div class="why-card">
+      <div>💰</div>
+      <h3>Local Deals</h3>
+      <p>Find exciting local offers.</p>
+    </div>
+
+    <div class="why-card">
+      <div>📍</div>
+      <h3>Nearby Shops</h3>
+      <p>Find shops close to your location.</p>
+    </div>
+
+    <div class="why-card">
+      <div>🤝</div>
+      <h3>Support Local</h3>
+      <p>Support your local businesses.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="footer-grid">
+
+    <div>
+      <h3>Apna Local Market</h3>
+      <p>
+        Apne shehar ke local businesses ko ek platform par discover karein.
+      </p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#shops">Shops</a>
+      <a href="#offers">Offers</a>
+    </div>
+
+    <div>
+      <h3>For Shop Owners</h3>
+      <a href="#">Register Your Shop</a>
+      <a href="#">Business Login</a>
+      <a href="#">Add Products</a>
+      <a href="#">Manage Offers</a>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <p>📞 +91 98765 43210</p>
+      <p>📧 support@apnalocalmarket.in</p>
+      <p>📍 Bhopal, Madhya Pradesh</p>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 Apna Local Market. All Rights Reserved.
+  </div>
+
+</footer>
+
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-nav">
+
+  <a href="#home">
+    <span>🏠</span>
+    Home
+  </a>
+
+  <a href="#categories">
+    <span>📂</span>
+    Categories
+  </a>
+
+  <a href="#shops">
+    <span>🔍</span>
+    Search
+  </a>
+
+  <a href="#offers">
+    <span>🔥</span>
+    Offers
+  </a>
+
+  <a href="#">
+    <span>👤</span>
+    Profile
+  </a>
+
+</div>
+
+
+<script>
+
+  // SEARCH
+  function searchShops() {
+
+    const input =
+      document.getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+    const shops =
+      document.querySelectorAll(".shop-card");
+
+    if (input === "") {
+      shops.forEach(shop => {
+        shop.style.display = "block";
+      });
+
+      return;
+    }
+
+    shops.forEach(shop => {
+
+      const name =
+        shop.dataset.name.toLowerCase();
+
+      if (name.includes(input)) {
+        shop.style.display = "block";
+      } else {
+        shop.style.display = "none";
+      }
+
+    });
+
+    document.getElementById("shops")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+  }
+
+
+  // ENTER KEY SEARCH
+  document
+    .getElementById("searchInput")
+    .addEventListener("keypress", function(event) {
+
+      if (event.key === "Enter") {
+        searchShops();
+      }
+
+    });
+
+
+  // VIEW SHOP
+  function viewShop(shopName) {
+
+    alert(
+      "Welcome to " +
+      shopName +
+      "!\n\nShop details page can be connected here."
+    );
+
+  }
+
+
+  // CALL
+  function callShop() {
+
+    alert(
+      "Calling local shop..."
+    );
+
+  }
+
+
+  // OFFER
+  function claimOffer() {
+
+    alert(
+      "Offer selected!\n\nConnect this button to your offer/order system."
+    );
+
+  }
+
+</script>
+
+</body>
+</html>
